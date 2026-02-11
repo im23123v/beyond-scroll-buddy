@@ -1,12 +1,16 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Pause, ArrowRight, Coffee, AlertTriangle } from 'lucide-react';
 import { useApp } from '@/contexts/AppContext';
 import { Button } from '@/components/ui/button';
 
 const RedirectOverlay = () => {
-  const { redirectApp, mode } = useApp();
+  const { redirectApps, mode } = useApp();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  const blockedApp = searchParams.get('app') || '';
+  const redirectTo = redirectApps[blockedApp] || 'Kindle';
 
   return (
     <div className="mobile-container bg-background min-h-screen flex flex-col items-center justify-center px-8">
@@ -22,6 +26,9 @@ const RedirectOverlay = () => {
 
         <h1 className="text-2xl font-bold font-display text-foreground mb-2">Pause.</h1>
         <p className="text-lg text-foreground mb-1">Is this intentional?</p>
+        {blockedApp && (
+          <p className="text-primary text-sm font-medium mb-1">You tried to open {blockedApp}</p>
+        )}
         <p className="text-muted-foreground text-sm mb-10">You've reached your scroll limit.</p>
 
         <div className="space-y-3 w-full">
@@ -30,7 +37,7 @@ const RedirectOverlay = () => {
             className="w-full h-12 rounded-xl gradient-primary text-primary-foreground font-semibold glow-primary"
           >
             <ArrowRight className="w-4 h-4 mr-2" />
-            Open {redirectApp}
+            Open {redirectTo}
           </Button>
 
           <Button
