@@ -9,7 +9,7 @@ interface AppState {
   dailyLimit: number; // minutes
   smartTrigger: boolean;
   blockedApps: string[];
-  redirectApp: string;
+  redirectApps: Record<string, string>;
   scrollControlOn: boolean;
   currentStreak: number;
   longestStreak: number;
@@ -25,7 +25,7 @@ interface AppContextType extends AppState {
   setDailyLimit: (limit: number) => void;
   setSmartTrigger: (on: boolean) => void;
   toggleBlockedApp: (app: string) => void;
-  setRedirectApp: (app: string) => void;
+  setRedirectApp: (blockedApp: string, redirectTo: string) => void;
   toggleScrollControl: () => void;
   setOnboarded: (v: boolean) => void;
 }
@@ -37,7 +37,7 @@ const defaults: AppState = {
   dailyLimit: 30,
   smartTrigger: false,
   blockedApps: [],
-  redirectApp: 'Kindle',
+  redirectApps: {},
   scrollControlOn: false,
   currentStreak: 0,
   longestStreak: 0,
@@ -73,7 +73,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     ...s,
     blockedApps: s.blockedApps.includes(app) ? s.blockedApps.filter(a => a !== app) : [...s.blockedApps, app],
   }));
-  const setRedirectApp = (app: string) => setState(s => ({ ...s, redirectApp: app }));
+  const setRedirectApp = (blockedApp: string, redirectTo: string) => setState(s => ({ ...s, redirectApps: { ...s.redirectApps, [blockedApp]: redirectTo } }));
   const toggleScrollControl = () => setState(s => ({ ...s, scrollControlOn: !s.scrollControlOn }));
   const setOnboarded = (onboarded: boolean) => setState(s => ({ ...s, onboarded }));
 
