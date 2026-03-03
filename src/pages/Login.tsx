@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Eye, EyeOff, Flame } from 'lucide-react';
+import { Eye, EyeOff } from 'lucide-react';
 import { useApp } from '@/contexts/AppContext';
+import logo from '@/assets/logo.png';
 import MobileLayout from '@/components/MobileLayout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -35,9 +36,9 @@ const Login = () => {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: 'spring', stiffness: 200, delay: 0.1 }}
-          className="w-16 h-16 rounded-2xl gradient-primary flex items-center justify-center mb-4 glow-primary"
+          className="mb-4"
         >
-          <Flame className="w-8 h-8 text-primary-foreground" />
+          <img src={logo} alt="BeyondScroll Logo" className="w-20 h-20 rounded-2xl" />
         </motion.div>
         <h1 className="text-3xl font-bold font-display text-gradient">BeyondScroll</h1>
         <p className="text-muted-foreground text-sm mt-1">Take control of your screen time</p>
