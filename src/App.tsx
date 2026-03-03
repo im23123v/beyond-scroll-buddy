@@ -4,7 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AppProvider } from "@/contexts/AppContext";
-import Login from "./pages/Login";
+import ChooseProfile from "./pages/ChooseProfile";
 import Dashboard from "./pages/Dashboard";
 import ModeSelection from "./pages/ModeSelection";
 import Configuration from "./pages/Configuration";
@@ -23,8 +23,8 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Navigate to="/login" replace />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Navigate to="/choose-profile" replace />} />
+            <Route path="/choose-profile" element={<ChooseProfile />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/mode-selection" element={<ModeSelection />} />
             <Route path="/configuration" element={<Configuration />} />
